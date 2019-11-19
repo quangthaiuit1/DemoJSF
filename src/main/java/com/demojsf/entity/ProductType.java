@@ -16,10 +16,6 @@ import javax.persistence.TemporalType;
 @Table(name = "product_type", catalog = "shopdan")
 public class ProductType implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 	private int categoryId;

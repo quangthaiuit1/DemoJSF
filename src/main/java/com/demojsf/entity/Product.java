@@ -1,5 +1,3 @@
-// default package
-// Generated Nov 18, 2019 1:52:48 PM by Hibernate Tools 5.1.10.Final
 package com.demojsf.entity;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,11 +17,6 @@ import javax.persistence.TemporalType;
 @Table(name = "product", catalog = "shopdan")
 public class Product implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private Integer id;
 	private String name;
 	private String description;

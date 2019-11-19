@@ -1,5 +1,3 @@
-
-// Generated Nov 18, 2019 1:52:48 PM by Hibernate Tools 5.1.10.Final
 package com.demojsf.entity;
 import java.util.Date;
 import javax.persistence.Column;
@@ -18,6 +16,10 @@ import javax.persistence.TemporalType;
 @Table(name = "category", catalog = "shopdan")
 public class Category implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 	private Date createdDate;
