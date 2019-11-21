@@ -4,29 +4,76 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<style type="text/css">
+    .ui-widget {
+        font-size: 90%;
+    }
+	</style>
 </h:head>
 <h:body>
-	<h3>Category List</h3>
-	<h:form prependId="false">
-		<h:dataTable var="category" value="#{categoryManagedBean.categorys}"
-			border="1" cellpadding="2" cellspacing="2">
-			<h:column>
-				<f:facet name="header">Id</f:facet>
-				#{category.id}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Name</f:facet>
-				#{category.name}
-			</h:column>
-			<h:column>
-				<f:facet name="header">Created Date</f:facet>
-				#{category.createdDate}
-			</h:column>
-		</h:dataTable>
+	<h:form id="formAdd">
+    	
+		<p:commandButton value="Thêm" type="button" onclick="PF('addCategory').show();" style="margin-left:64.5%;width:8.5%"/>    	
+		<p:dialog header="Thêm" modal="true" widgetVar="addCategory" width="50%">
+			<p:column headerText="Tên" style="margin-top:5px">
+		        <h:inputText value="#{categoryManagedBean.name}" required="true" />
+		    </p:column>
+			 
+			<p:commandButton value="Thêm" style="margin-left:10px;" action="#{categoryManagedBean.addCategory()}" />
+			<br></br><br></br>
+			<p:commandButton value="Quay Lại" style="margin-left:10px;" action="#{categoryManagedBean.returnIndex()}" />
+				
+		</p:dialog>
+		
+	</h:form>
+		
+	<h:form id="formAll">
+		<p:growl id="msgs" showDetail="true" />
+		<p:dataTable id="pDataTable" var="category" value="#{categoryManagedBean.findAll()}" style="width: 60%;margin: 0 auto">
+			<p:column headerText="Id" style="width: 10%;text-align: center">
+       	 		<f:facet name="header">ID</f:facet>
+                #{category.id}
+		    </p:column>
+		 
+		    <p:column headerText="Tên" style="width: 30%;text-align: center">
+		        <h:outputText value="#{category.name}"/>
+		    </p:column>
+		    <p:column headerText="Ngày Tạo" style="width: 30%;text-align: center">
+		        <h:outputText value="#{category.createdDate}"/>
+		    </p:column>
+   		    <p:column headerText="Ngày Sửa" style="width: 30%;text-align: center">
+		        <h:outputText value="#{category.modifiedDate}"/>
+		    </p:column>
+		    <p:column headerText="Sửa" style="width: 20%;text-align: center">
+	             	<p:commandButton update=":formAll:categoryDetail"  oncomplete="PF('updateCategory').show()" value="Sửa">
+		                <f:setPropertyActionListener value="#{category}" target="#{categoryManagedBean.selectedCategory}" />
+		            </p:commandButton>
+	        </p:column>
+
+		    <p:column headerText="Xóa" style="width: 15%;text-align: center">
+					<p:commandButton value="Xóa" actionListener="${categoryManagedBean.deleteCategory(category.id)}"  update="@form" ajax="true"/>		    
+			</p:column>
+		 
+		</p:dataTable>
+		<p:dialog header="Sửa" widgetVar="updateCategory" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+	        <p:outputPanel id="categoryDetail" style="text-align:center;">
+	            <p:panelGrid  columns="2" rendered="#{not empty categoryManagedBean.selectedCategory}" columnClasses="label,value">
+	                <h:outputText value="Tên:" />
+	                <h:inputText value="#{categoryManagedBean.selectedCategory.name}" />
+	 				
+	                <h:outputText value="Ngày Tạo:" />
+	                <h:outputText value="#{categoryManagedBean.selectedCategory.createdDate}"/>
+	            </p:panelGrid>
+	            <h:inputHidden id="txt2" value="#{categoryManagedBean.selectedCategory.id}" />
+	        </p:outputPanel>
+	        <br></br>
+	        <p:commandButton value="Quay lại" action="#{categoryManagedBean.returnIndex()}" style="width: 50%"/> 
+	        <p:commandButton value="Cập nhật" action="#{categoryManagedBean.updateCategory()}" style="width: 49%" /> 
+	        
+	    </p:dialog>
 	</h:form>
 </h:body>
 </html>

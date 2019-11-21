@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+     
+<h:head>
+	<style type="text/css">
+    .ui-widget {
+        font-size: 90%;
+    }
+	</style>
+</h:head>
+     
+<h:body>
+	
+	<h:form>
+		<p:dataTable  value="#{categoryManagedBean.findById()}" style="margin: 0 auto;margin-bottom: 5px">
+		   <p:column headerText="Name" style="text-align: center">
+		        <h:inputText value="#{oneCategory.name}">#{oneCategory.name}</h:inputText>
+		    </p:column>
+		 
+		    <p:column headerText="Created Date" style="text-align: center">
+		        <h:outputText value="#{oneCategory.createdDate}"/>
+		    </p:column>
+		    <p:column>
+		  		   <p:commandButton value="Update Category" style="margin-left:10px;" action="#{categoryManagedBean.updateCategory()}" />
+	  	 	 </p:column>
+		 </p:dataTable>
+	</h:form> 
+</h:body>
+     
+</html>

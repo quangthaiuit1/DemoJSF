@@ -10,11 +10,32 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>Hello World PrimeFaces</h1>
-
 	<h:form>
-	   <p:editor value="#{helloWorld.value}" />
+    	<p:commandButton value="View" icon="pi pi-home" action="#{dfView.viewCars}" />
+    	
 	</h:form>
-
+	
+	<h:form prependId="false">
+		<p:dataTable id="pDataTable" var="category" value="#{categoryManagedBean.findAll()}" style="width: 60%;margin: 0 auto">
+			<p:column headerText="Id" style="width: 10%;text-align: center">
+       	 		<h:outputText value="#{category.id}" />
+		    </p:column>
+		 
+		    <p:column headerText="Name" style="width: 30%;text-align: center">
+		        <h:outputText value="#{category.name}"/>
+		    </p:column>
+		 
+		    <p:column headerText="Created Date" style="width: 30%;text-align: center">
+		        <h:outputText value="#{category.createdDate}"/>
+		    </p:column>
+		    <p:column headerText="Update" style="width: 15%;text-align: center">
+		    	    <p:commandButton value="Update" actionListener="#"  reRender="pdataTable" ajax="true"/>
+		    </p:column>
+		    <p:column headerText="Delete" style="width: 15%;text-align: center">
+					<p:commandButton value="Delete" actionListener="${categoryManagedBean.deleteCategory(category.id)}"  update="@form" ajax="true"/>		    
+			</p:column>
+		 
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

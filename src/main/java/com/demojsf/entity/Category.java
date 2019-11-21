@@ -1,9 +1,11 @@
 package com.demojsf.entity;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -14,17 +16,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "category", catalog = "shopdan")
-public class Category implements java.io.Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Category{
 	private Integer id;
 	private String name;
 	private Date createdDate;
 	private Date modifiedDate;
-
+	
 	public Category() {
 	}
 
